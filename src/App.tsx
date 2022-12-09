@@ -31,7 +31,6 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <div className="App">
-        <Menu />
         <RouterProvider router={router} />
       </div>
     </ThemeProvider>

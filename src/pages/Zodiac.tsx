@@ -1,7 +1,9 @@
+import Menu from "../Menu";
 
 function Zodiac() {
 	return (
 		<div className="App">
+			<Menu />
 			<h1>
 				Zo:diac: NLP-Generated Horoscopes
 			</h1>
