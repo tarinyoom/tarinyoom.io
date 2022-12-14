@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import { NavLink } from 'react-router-dom';
+import MyResume from "./MyResume.pdf";
 
 function Menu() {
 	return (
@@ -34,7 +35,19 @@ function Menu() {
                 </IconButton>
               </NavLink>
 
-              <a href="https://github.com/tarinyoom">
+              <a href={MyResume} download="AdamChiuReynoldsResume">
+              <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  sx={{ mr: 2 }}
+                >
+                  Résumé
+                </IconButton>
+              </a>
+
+              <a href="https://github.com/tarinyoom" target="_blank" rel="noreferrer">
                 <IconButton
                   size="large"
                   edge="start"

@@ -7,7 +7,6 @@ import {
 import './App.css';
 import Home from './pages/Home';
 import Zodiac from './pages/Zodiac';
-import Menu from './Menu';
 
 const darkTheme = createTheme({
   palette: {
