@@ -5,12 +5,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import './App.css';
-import Home from './pages/Home';
-import Zodiac from './pages/Zodiac';
+import Home from './Home';
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark'
+    mode: 'dark',
+    background: {
+      default: "#333333"
+    } 
   }
 });
 
@@ -18,10 +20,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home/>,
-  },
-  {
-    path: "/zodiac",
-    element: <Zodiac/>
   }
 ]);
 
