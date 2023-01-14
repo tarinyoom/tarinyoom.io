@@ -2,10 +2,12 @@ import ProjectCard from "./ProjectCard";
 import { Grid } from "@mui/material";
 import zodiac from './img/zodiac.png';
 import sonic from './img/sonic.png';
+import AppBar from './MyAppBar';
 
 function Home() {
 	return (
 	  <div className="App">
+		<AppBar />
 
 		<Grid
 			container
