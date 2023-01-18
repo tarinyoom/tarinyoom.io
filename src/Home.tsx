@@ -22,9 +22,9 @@ function Home() {
 
 			<Grid item>
 				<ProjectCard
-					title="ODE Integrator"
+					title="ODE Visualization and Sonification"
 					img={sonic}
-					description="Parallelized numerical integration of 2nd order ODEs. Plays an animation with sound to show solution trajectories."
+					description="Numerical integration of 2nd order ODEs. Plays an animation with sound to show solution trajectories."
 					demo="https://ode.tarinyoom.io"
 					demoLinkName="Demo"
 					src="https://github.com/tarinyoom/ode-integrators"
