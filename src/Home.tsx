@@ -22,11 +22,13 @@ function Home() {
 
 			<Grid item>
 				<ProjectCard
-					title="Sonic Integration"
+					title="ODE Integrator"
 					img={sonic}
-					description="Numerical integration of 2nd order ODEs. Plays an animation with sound to show solution trajectories."
+					description="Parallelized numerical integration of 2nd order ODEs. Plays an animation with sound to show solution trajectories."
 					demo="https://ode.tarinyoom.io"
-					src="https://github.com/tarinyoom/ode-integrators" />
+					demoLinkName="Demo"
+					src="https://github.com/tarinyoom/ode-integrators"
+					technologies={["typeScript", "d3", "tone", "react", "rust", "lambda", ]} />
 			</Grid>
 
 			<Grid item>
@@ -36,7 +38,9 @@ function Home() {
 					description="NLP-driven horoscope generator, created for the co:here Generative AI Hackathon.
 					Made in collaboration with Aditya Tuladhar."
 					demo="https://zodiac.tarinyoom.io"
-					src="https://github.com/tarinyoom/zodiac" />
+					demoLinkName="Demo"
+					src="https://github.com/tarinyoom/zodiac"
+					technologies={["typeScript", "react", "node", "workers"]} />
 			</Grid>
 			<Grid item />
 		</Grid>
