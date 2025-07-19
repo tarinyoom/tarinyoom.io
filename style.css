@@ -1,0 +1,31 @@
+:root {
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+  --accent-blue: #4cc9f0;
+  --accent-purple: #7209b7;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.app-bar {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(to right, var(--accent-purple), var(--accent-blue));
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.content {
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+}
