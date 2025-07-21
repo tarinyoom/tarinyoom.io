@@ -17,13 +17,44 @@ function renderHeader(): HTMLElement {
   ]);
 }
 
+type Article = {
+  title: string;
+  date: string;
+  tags: string[];
+  content: string;
+};
+
+function fetchArticles(): Article[] {
+  return [
+    {
+      title: "First Article",
+      date: "2023-10-01",
+      tags: ["tag1", "tag2"],
+      content: "This is the content of the first article."
+    },
+    {
+      title: "Second Article",
+      date: "2023-10-02",
+      tags: ["tag2", "tag3"],
+      content: "This is the content of the second article."
+    }
+  ];
+}
+
+function renderArticle(article: Article): HTMLElement {
+  return h("article", {}, [
+    h("h2", {}, [article.title]),
+    h("p", { className: "date" }, [article.date]),
+    h("p", { className: "tags" }, article.tags.map(tag => h("span", { className: "tag" }, [tag]))),
+    h("p", {}, [article.content])
+  ]);
+}
+
 function renderMainContent(): HTMLElement {
+  const articles = fetchArticles();
+  const articleElements = articles.map(renderArticle);
   return h("main", {}, [
-    h("div", { className: "content" }, [
-      h("p", { id: "long-text" }, [
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ".repeat(20)
-      ])
-    ])
+    h("div", { className: "content" }, articleElements)
   ]);
 }
 
