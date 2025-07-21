@@ -28,11 +28,11 @@ function renderMainContent(): HTMLElement {
 }
 
 function renderApp(): HTMLElement {
-  const fragment = document.createDocumentFragment();
-  fragment.appendChild(renderHeader());
-  fragment.appendChild(renderMainContent());
-  return fragment as unknown as HTMLElement; // Fragment isn't HTMLElement, but body accepts it.
+  return h("div", {}, [
+    renderHeader(),
+    renderMainContent()
+  ]);
 }
 
-document.body.innerHTML = ""; // Clear default body
+document.body.innerHTML = "";
 document.body.appendChild(renderApp());
