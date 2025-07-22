@@ -17,7 +17,7 @@ function h<K extends keyof HTMLElementTagNameMap>(
 
 function renderHeader(): HTMLElement {
   return h("header", { className: "app-bar" }, [
-    h("h1", {}, ["My Website"])
+    h("h1", {}, ["Adam's Dev Journal"])
   ]);
 }
 
