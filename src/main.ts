@@ -88,13 +88,11 @@ async function fetchArticle(filepath: string): Promise<Article> {
 function renderArticle(articlePromise: Promise<Article>): HTMLElement {
   const titleEl = h("h2", {}, ["Loading title..."]);
   const dateEl = h("p", { className: "date" }, ["Loading date..."]);
-  const tagsEl = h("p", { className: "tags" }, ["Loading tags..."]);
   const contentEl = h("div", { className: "markdown-body" }, ["Loading content..."]);
 
   const container = h("article", {}, [
     titleEl,
     dateEl,
-    tagsEl,
     contentEl
   ]);
 
@@ -102,15 +100,10 @@ function renderArticle(articlePromise: Promise<Article>): HTMLElement {
     titleEl.textContent = article.title;
     dateEl.textContent = article.date;
 
-    tagsEl.replaceChildren(...article.tags.map(tag =>
-      h("span", { className: "tag" }, [tag])
-    ));
-
     contentEl.innerHTML = await marked.parse(article.content);
   }).catch(err => {
     titleEl.textContent = "Error loading article";
     dateEl.textContent = "";
-    tagsEl.textContent = "";
     contentEl.textContent = err.message;
   });
 
