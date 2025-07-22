@@ -116,8 +116,8 @@ function renderArticle(articlePromise: Promise<Article>): HTMLElement {
 }
 
 function renderMainContent(): HTMLElement {
-  const article = fetchArticle("/articles/a01_hello.md");
-  const articleElements = [renderArticle(article)];
+  const articles = [ "/articles/a001_hello.md", "/articles/a002_another.md" ];
+  const articleElements = articles.map(fetchArticle).map(renderArticle);
   return h("main", {}, [
     h("div", { className: "content" }, articleElements)
   ]);
