@@ -89,11 +89,13 @@ function renderArticle(articlePromise: Promise<Article>): HTMLElement {
   const titleEl = h("h2", {}, ["Loading title..."]);
   const dateEl = h("p", { className: "date" }, ["Loading date..."]);
   const contentEl = h("div", { className: "markdown-body" }, ["Loading content..."]);
+  const footerEl = h("hr", { className: "post-separator" }, []);
 
   const container = h("article", {}, [
     titleEl,
     dateEl,
-    contentEl
+    contentEl,
+    footerEl
   ]);
 
   articlePromise.then(async article => {
