@@ -1,6 +1,6 @@
 import { marked } from "marked";
 
-const articles = [ "/articles/a001_hello.md", "/articles/a002_another.md" ];
+const articles = [ "a001_hello.md", "a002_another.md" ];
 
 function h<K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -118,7 +118,10 @@ function renderArticle(articlePromise: Promise<Article>): HTMLElement {
 }
 
 function renderMainContent(): HTMLElement {
-  const articleElements = articles.map(fetchArticle).map(renderArticle);
+  const articleElements = articles
+    .map(name => "/articles/" + name)
+    .map(fetchArticle)
+    .map(renderArticle);
   return h("main", {}, [
     h("div", { className: "content" }, articleElements)
   ]);
