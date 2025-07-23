@@ -86,9 +86,9 @@ async function fetchArticle(filepath: string): Promise<Article> {
 }
 
 function renderArticle(articlePromise: Promise<Article>): HTMLElement {
-  const titleEl = h("h2", {}, ["Loading title..."]);
-  const dateEl = h("p", { className: "date" }, ["Loading date..."]);
-  const contentEl = h("div", { className: "markdown-body" }, ["Loading content..."]);
+  const titleEl = h("h2", {}, []);
+  const dateEl = h("p", { className: "date" }, []);
+  const contentEl = h("div", { className: "markdown-body" }, []);
   const footerEl = h("hr", { className: "post-separator" }, []);
 
   const container = h("article", {}, [
