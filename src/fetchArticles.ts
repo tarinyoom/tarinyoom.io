@@ -77,7 +77,8 @@ async function fetchArticles(csvPath: string): Promise<Article[]> {
     .map(info => ["/articles/" + info[0], info[1]] as const)
     .map(info => fetchArticle(info[0], info[1]));
 
-  return Promise.all(articleFetchPromises);
+  const unsorted = await Promise.all(articleFetchPromises);
+  return unsorted.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export { fetchArticles };
