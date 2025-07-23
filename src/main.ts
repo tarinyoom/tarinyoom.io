@@ -1,6 +1,6 @@
 import { marked } from "marked";
 
-const articles = [ "a002_another.md", "a001_hello.md" ];
+const articles = [ "a002_dependency_shedding.md", "a001_hello_world.md" ];
 
 function h<K extends keyof HTMLElementTagNameMap>(
   tag: K,

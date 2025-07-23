@@ -4,21 +4,16 @@ date: 2025-07-22
 tags: [thoughts]
 ---
 
-This is the second time I've set up a personal site. Previously, I had a simple website I'd made with a tool called [create-react-app](https://create-react-app.dev/docs/getting-started/), with components from [MaterialUI](https://mui.com/material-ui/).
+This is the second time I've set up a personal site. Previously, I had a simple website I'd made with a tool called [*create-react-app*](https://create-react-app.dev/docs/getting-started/), with components from [MaterialUI](https://mui.com/material-ui/).
 It had a few cards pointing to personal projects I've worked on in the past, like so:
 
-![Logo](/images/placeholder.png)
-*Image of old site here*
+![Old Personal Website](/images/old_site.png)
 
-This worked well, until I left it alone and came back a few years later with notices like:
-
-![Logo](/images/placeholder.png)
-*Dependabot alerts image here*
-
+This worked well, until the years passed and my dependabot began harassing me with streams of urgent security vulnerabilities that needed my attention.
 Of course, I could `npm audit fix` to upgrade to newer patched versions of my dependencies.
-But even then, my project may have needed further updating.
-create-react-app had lost popularity to next.js, and I now faced additional decisions that required additional understanding of the world of React.
-In my absence, the entire React ecosystem seemed to have reinvented itself.
+But even then, my project needed further updating.
+*create-react-app* had lost popularity to next.js, and I now had to reason about an entirely different framework for setting up my website.
+The entire React ecosystem seemed to have reinvented itself.
 
 I once had a professor tell me that learning web technologies is like catching a tiger by its tail: it's hard to catch on, and once you do, you need to hold on tight.
 For me, front-end frameworks may just not be a tiger I'm trying to catch.
