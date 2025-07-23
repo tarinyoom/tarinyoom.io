@@ -17,7 +17,13 @@ function h<K extends keyof HTMLElementTagNameMap>(
 
 function renderHeader(): HTMLElement {
   return h("header", { className: "app-bar" }, [
-    h("h1", {}, ["Adam's Dev Journal"])
+    h("h1", {}, ["Adam's Dev Journal"]),
+    h("a", {
+      href: "https://github.com/tarinyoom",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      className: "github-link"
+    }, ["GitHub ↗"])
   ]);
 }
 
