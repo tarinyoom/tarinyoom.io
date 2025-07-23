@@ -7,10 +7,12 @@ tags: [thoughts]
 This is the second time I've set up a personal site. Previously, I had a simple website I'd made with a tool called [create-react-app](https://create-react-app.dev/docs/getting-started/), with components from [MaterialUI](https://mui.com/material-ui/).
 It had a few cards pointing to personal projects I've worked on in the past, like so:
 
+![Logo](/images/placeholder.png)
 *Image of old site here*
 
 This worked well, until I left it alone and came back a few years later with notices like:
 
+![Logo](/images/placeholder.png)
 *Dependabot alerts image here*
 
 Of course, I could `npm audit fix` to upgrade to newer patched versions of my dependencies.
