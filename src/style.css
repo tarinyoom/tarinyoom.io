@@ -16,12 +16,13 @@ body {
 .app-bar {
   position: sticky;
   top: 0;
-  background: linear-gradient(to right, var(--accent-purple), var(--accent-blue));
+  background-color: #1a1a1a;
   color: white;
   padding: 1rem;
   text-align: center;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  border-bottom: 4px solid var(--accent-purple);
 }
 
 .content {
