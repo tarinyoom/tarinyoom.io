@@ -65,4 +65,4 @@ const articlePromises = articles
     .map(name => "/articles/" + name)
     .map(fetchArticle)
 document.body.innerHTML = "";
-document.body.appendChild(renderApp(articlePromises));
+document.body.appendChild(renderApp(Promise.all(articlePromises)));

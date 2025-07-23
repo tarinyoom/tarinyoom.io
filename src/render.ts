@@ -21,44 +21,53 @@ export function renderHeader(): HTMLElement {
   ]);
 }
 
-function renderArticle(articlePromise: Promise<Article>): HTMLElement {
-  const titleEl = h("h2", {}, []);
-  const dateEl = h("p", { className: "date" }, []);
-  const contentEl = h("div", { className: "markdown-body" }, []);
-  const footerEl = h("hr", { className: "post-separator" }, []);
+function renderArticles(articles: Article[]): HTMLElement[] {
+  return articles.map(article => {
+    const titleEl = h("h2", {}, [article.title]);
+    const dateEl = h("p", { className: "date" }, [article.date]);
+    const contentEl = h("div", { className: "markdown-body" }, []);
+    const footerEl = h("hr", { className: "post-separator" }, []);
 
-  const container = h("article", {}, [
-    titleEl,
-    dateEl,
-    contentEl,
-    footerEl
+    const parsed = marked.parse(article.content);
+    if (typeof parsed === "string") {
+      contentEl.innerHTML = parsed;
+    } else {
+      parsed.then(html => {
+        contentEl.innerHTML = html;
+      });
+    }
+
+    return h("article", {}, [
+      titleEl,
+      dateEl,
+      contentEl,
+      footerEl
+    ]);
+  });
+}
+
+function renderMainContent(articlesPromise: Promise<Article[]>): HTMLElement {
+  const container = h("main", {}, [
+    h("div", { className: "content" }, [])
   ]);
 
-  articlePromise.then(async article => {
-    titleEl.textContent = article.title;
-    dateEl.textContent = article.date;
-
-    contentEl.innerHTML = await marked.parse(article.content);
+  articlesPromise.then(articles => {
+    const articleElements = renderArticles(articles);
+    for (const el of articleElements) {
+      container.querySelector(".content")?.appendChild(el);
+    }
   }).catch(err => {
-    titleEl.textContent = "Error loading article";
-    dateEl.textContent = "";
-    contentEl.textContent = err.message;
+    const errorEl = h("div", { className: "error" }, [err.message]);
+    container.querySelector(".content")?.appendChild(errorEl);
   });
 
   return container;
 }
 
-function renderMainContent(articlePromises: Promise<Article>[]): HTMLElement {
-  const articleElements = articlePromises.map(renderArticle);
-  return h("main", {}, [
-    h("div", { className: "content" }, articleElements)
-  ]);
-}
-
-function renderApp(articlePromises: Promise<Article>[]): HTMLElement {
+function renderApp(articlesPromise: Promise<Article[]>): HTMLElement {
   return h("div", {}, [
     renderHeader(),
-    renderMainContent(articlePromises)
+    renderMainContent(articlesPromise)
   ]);
 }
 
