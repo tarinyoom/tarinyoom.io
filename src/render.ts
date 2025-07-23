@@ -15,9 +15,15 @@ function h<K extends keyof HTMLElementTagNameMap>(
   return el;
 }
 
-export function renderHeader(): HTMLElement {
+function renderHeader(): HTMLElement {
   return h("header", { className: "app-bar" }, [
     h("h1", {}, ["Adam's Dev Journal"])
+  ]);
+}
+
+function renderFooter(): HTMLElement {
+  return h("footer", { className: "app-footer" }, [
+    h("p", {}, ["© 2025 Adam Reynolds"])
   ]);
 }
 
@@ -67,7 +73,8 @@ function renderMainContent(articlesPromise: Promise<Article[]>): HTMLElement {
 function renderApp(articlesPromise: Promise<Article[]>): HTMLElement {
   return h("div", {}, [
     renderHeader(),
-    renderMainContent(articlesPromise)
+    renderMainContent(articlesPromise),
+    renderFooter()
   ]);
 }
 
