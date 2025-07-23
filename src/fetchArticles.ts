@@ -1,6 +1,6 @@
 import { Article } from "./types";
 
-function parseRawArticle(raw: string): Article {
+function parseRawArticle(raw: string, date: string): Article {
   const match = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/m.exec(raw);
   if (!match) {
     throw new Error("Missing or invalid frontmatter");
@@ -33,8 +33,8 @@ function parseRawArticle(raw: string): Article {
     data[key.trim()] = value;
   }
 
-  const { title, date, tags } = data;
-  if (typeof title !== "string" || typeof date !== "string" || !Array.isArray(tags)) {
+  const { title, tags } = data;
+  if (typeof title !== "string" || !Array.isArray(tags)) {
     throw new Error("Missing or invalid required fields in frontmatter");
   }
 
@@ -46,14 +46,14 @@ function parseRawArticle(raw: string): Article {
   };
 }
 
-async function fetchArticle(filepath: string): Promise<Article> {
+async function fetchArticle(filepath: string, date: string): Promise<Article> {
   const response = await fetch(filepath);
   if (!response.ok) {
     throw new Error(`Failed to fetch article: ${response.statusText}`);
   }
 
   const raw = await response.text();
-  const article = parseRawArticle(raw);
+  const article = parseRawArticle(raw, date);
   return article;
 }
 
@@ -64,11 +64,18 @@ async function fetchArticles(csvPath: string): Promise<Article[]> {
   }
 
   const csvText = await response.text();
-  const articleNames = csvText.split("\n").map(line => line.trim()).filter(Boolean);
+  const entries = csvText.split("\n").map(line => line.trim()).filter(Boolean);
+  const articleInfo = entries.map(entry => {
+    const [name, date] = entry.split(" ");
+    if (!name || !date) {
+      throw new Error(`Invalid entry in articles.csv: ${entry}`);
+    }
+    return [name, date];
+  });
 
-  const articleFetchPromises = articleNames
-    .map(name => "/articles/" + name)
-    .map(fetchArticle);
+  const articleFetchPromises = articleInfo
+    .map(info => ["/articles/" + info[0], info[1]] as const)
+    .map(info => fetchArticle(info[0], info[1]));
 
   return Promise.all(articleFetchPromises);
 }
