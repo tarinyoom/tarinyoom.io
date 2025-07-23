@@ -27,6 +27,13 @@ function renderHeader(): HTMLElement {
   ]);
 }
 
+function renderContentPreface(qotd: string): HTMLElement {
+  return h("div", { className: "content-preface" }, [
+    h("p", { className: "quote" }, [qotd]),
+    h("hr", { className: "post-separator" }, [])
+  ]);
+}
+
 function renderFooter(): HTMLElement {
   return h("footer", { className: "app-footer" }, [
     h("p", {}, ["© 2025 Adam Reynolds"])
@@ -76,9 +83,10 @@ function renderMainContent(articlesPromise: Promise<Article[]>): HTMLElement {
   return container;
 }
 
-function renderApp(articlesPromise: Promise<Article[]>): HTMLElement {
+function renderApp(qotd: string, articlesPromise: Promise<Article[]>): HTMLElement {
   return h("div", {}, [
     renderHeader(),
+    renderContentPreface(qotd),
     renderMainContent(articlesPromise),
     renderFooter()
   ]);

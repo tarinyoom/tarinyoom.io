@@ -40,9 +40,22 @@ body {
 }
 
 .content {
-  padding: 2rem;
+  padding: 0rem;
   max-width: 800px;
   margin: auto;
+}
+
+.content-preface {
+  padding: 0rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.quote {
+  max-width: 800px;
+  margin: 3rem auto;
+  font-style: italic;
+  text-align: center;
 }
 
 .post-separator {
