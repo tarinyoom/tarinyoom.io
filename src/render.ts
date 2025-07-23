@@ -27,9 +27,9 @@ function renderHeader(): HTMLElement {
   ]);
 }
 
-function renderContentPreface(qotd: string): HTMLElement {
+function renderContentPreface(): HTMLElement {
   return h("div", { className: "content-preface" }, [
-    h("p", { className: "quote" }, [qotd]),
+    h("p", { }, ["My notes and opinions on software development."]),
     h("hr", { className: "post-separator" }, [])
   ]);
 }
@@ -86,7 +86,7 @@ function renderMainContent(articlesPromise: Promise<Article[]>): HTMLElement {
 function renderApp(qotd: string, articlesPromise: Promise<Article[]>): HTMLElement {
   return h("div", {}, [
     renderHeader(),
-    renderContentPreface(qotd),
+    renderContentPreface(),
     renderMainContent(articlesPromise),
     renderFooter()
   ]);

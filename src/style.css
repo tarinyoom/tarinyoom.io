@@ -48,14 +48,9 @@ body {
 .content-preface {
   padding: 0rem;
   max-width: 800px;
-  margin: auto;
-}
-
-.quote {
-  max-width: 800px;
   margin: 3rem auto;
   font-style: italic;
-  text-align: center;
+  text-align: left;
 }
 
 .post-separator {
