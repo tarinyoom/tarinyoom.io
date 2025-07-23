@@ -40,10 +40,19 @@ function renderFooter(): HTMLElement {
   ]);
 }
 
+function formatArticleDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+}
+
 function renderArticles(articles: Article[]): HTMLElement[] {
   return articles.map(article => {
     const titleEl = h("h2", {}, [article.title]);
-    const dateEl = h("p", { className: "date" }, [article.date]);
+    const dateEl = h("p", { className: "date" }, [formatArticleDate(article.date)]);
     const contentEl = h("div", { className: "markdown-body" }, []);
     const footerEl = h("hr", { className: "post-separator" }, []);
 
