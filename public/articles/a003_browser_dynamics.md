@@ -16,8 +16,8 @@ What I want to do differently:
 
 So far, I've implemented a simple particles-in-a-box example, using a library called <a href="https://threejs.org/">three.js</a>. This is a lightweight library that sits atop WebGL, providing the structure of a scene and basic rendering.
 
-So far I've added gravity and some simple elastic collisions against invisible walls:
+I've added gravity and some simple elastic collisions against invisible walls:
 
 <video src="images/particles_in_a_box.webm" autoplay loop muted playsinline></video>
 
-So at this point it doesn't really look like a fluid, as much as a lot of tiny bouncing balls. The goal will be to implement <a href="https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics">smoothed-particle hydrodynamics</a> (SPH), a technique for approximating the continuous properties of a fluid with discrete particles by interpolating between them via smooth kernel functions. Or so the lore goes.
+At this point it doesn't really look like a fluid, as much as a lot of tiny bouncing balls. The goal will be to implement <a href="https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics">smoothed-particle hydrodynamics</a> (SPH), a technique for approximating the continuous properties of a fluid with discrete particles by interpolating between them via smooth kernel functions. Or so the lore goes.
