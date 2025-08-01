@@ -18,6 +18,6 @@ So far, I've implemented a simple particles-in-a-box example, using a library ca
 
 So far I've added gravity and some simple elastic collisions against invisible walls:
 
-<video src="images/just_gravity.webm" autoplay loop muted playsinline></video>
+<video src="images/particles_in_a_box.webm" autoplay loop muted playsinline></video>
 
-To capture the above video, I've added a <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder">MediaRecorder</a> object to my app, so that it records the first five seconds of activity in the browser and saves it as a file. I aws pleasantly surprised with how easy this recording utility was to set up.
+So at this point it doesn't really look like a fluid, as much as a lot of tiny bouncing balls. The goal will be to implement <a href="https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics">smoothed-particle hydrodynamics</a> (SPH), a technique for approximating the continuous properties of a fluid with discrete particles by interpolating between them via smooth kernel functions. Or so the lore goes.
