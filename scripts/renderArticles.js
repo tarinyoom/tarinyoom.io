@@ -11,8 +11,7 @@ const publicDir = path.resolve('public');
 
 fs.mkdirSync(publicDir, { recursive: true });
 
-// mdast -> hast handler that returns plain HAST (no `h`)
-function imageToVideoHandler(_state, node /*, parent */) {
+function imageToVideoHandler(_state, node) {
   const url = node.url || '';
   const alt = node.alt || '';
   const title = node.title || undefined;
@@ -29,7 +28,12 @@ function imageToVideoHandler(_state, node /*, parent */) {
     return {
       type: 'element',
       tagName: 'video',
-      properties: { controls: true, playsinline: true },
+      properties: {
+        autoplay: true,
+        muted: true,
+        loop: true,
+        playsinline: true,
+      },
       children: [
         {
           type: 'element',
@@ -42,7 +46,6 @@ function imageToVideoHandler(_state, node /*, parent */) {
     };
   }
 
-  // Default: emit a normal <img>
   const props = { src: url };
   if (alt) props.alt = alt;
   if (title) props.title = title;
