@@ -1,3 +1,5 @@
 node_modules
 dist
 public/*.html
+public/images
+public/videos
