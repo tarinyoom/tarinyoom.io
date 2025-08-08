@@ -38,10 +38,8 @@ function renderFooter(): HTMLElement {
 
 function renderArticles(articles: DocumentFragment[]): HTMLElement[] {
   return articles.map(article => {
-    const contentEl = h("div", { className: "markdown-body" }, []);
-
+    const contentEl = h("div", { className: "article-body" }, []);
     contentEl.append(article);
-
     const footerEl = h("hr", { className: "post-separator" }, []);
     return h("article", {}, [contentEl, footerEl]);
   });
