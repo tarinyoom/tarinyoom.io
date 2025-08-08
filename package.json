@@ -7,7 +7,7 @@
     "prebuild": "node scripts/renderArticles.js",
     "build": "vite build",
     "preview": "vite preview",
-    "clean": "rm -rf dist public/*.html"
+    "clean": "rm -rf dist public/*.html public/images public/videos"
   },
   "devDependencies": {
     "@types/node": "^24.2.1",
