@@ -16,8 +16,6 @@ function imageToVideoHandler(_state, node) {
   const alt = node.alt || '';
   const title = node.title || undefined;
 
-  console.log(`Processing image/video: ${url}`);
-
   if (url.startsWith('videos/')) {
     const ext = url.split('.').pop()?.toLowerCase();
     const mime =
