@@ -1,5 +1,6 @@
 ---
 title: "Hello, World!"
+date: 2025-07-21
 tags: [thoughts]
 ---
 

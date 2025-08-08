@@ -1,5 +1,6 @@
 ---
 title: "Browser Dynamics"
+date: 2025-07-29
 tags: [SPH]
 ---
 

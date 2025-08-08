@@ -4,6 +4,7 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
+import matter from 'gray-matter';
 
 const articlesDir = path.resolve('articles');
 const publicDir = path.resolve('public');
@@ -15,20 +16,27 @@ async function convertAll() {
 
   for (const file of files) {
     const mdPath = path.join(articlesDir, file);
-    const htmlPath = path.join(
-      publicDir,
-      file.replace(/\.md$/, '.html')
+    const htmlPath = path.join(publicDir, file.replace(/\.md$/, '.html'));
+
+    const raw = fs.readFileSync(mdPath, 'utf8');
+    const { content, data: frontmatter } = matter(raw);
+
+    // Build HTML body from markdown
+    const bodyHtml = String(
+      await unified()
+        .use(remarkParse)
+        .use(remarkRehype)
+        .use(rehypeStringify)
+        .process(content)
     );
 
-    const markdown = fs.readFileSync(mdPath, 'utf8');
+    // Frontmatter injection — defaults if missing
+    const titleHtml = `<h2>${frontmatter.title || ''}</h2>`;
+    const dateHtml = `<p class="date">${frontmatter.date || ''}</p>`;
 
-    const fileResult = await unified()
-      .use(remarkParse)        // Parse Markdown to MDAST
-      .use(remarkRehype)       // Transform MDAST to HAST
-      .use(rehypeStringify)    // Serialize HAST to HTML
-      .process(markdown);
+    const finalHtml = `${titleHtml}\n${dateHtml}\n${bodyHtml}`;
 
-    fs.writeFileSync(htmlPath, String(fileResult));
+    fs.writeFileSync(htmlPath, finalHtml);
     console.log(`Converted: ${file} → ${path.relative('.', htmlPath)}`);
   }
 }
