@@ -1,5 +1,3 @@
-import { Article } from "./types";
-
 function h<K extends keyof HTMLElementTagNameMap>(
   tag: K,
   props: Partial<HTMLElementTagNameMap[K]> = {},
@@ -38,18 +36,18 @@ function renderFooter(): HTMLElement {
   ]);
 }
 
-function renderArticles(articles: Article[]): HTMLElement[] {
+function renderArticles(articles: DocumentFragment[]): HTMLElement[] {
   return articles.map(article => {
     const contentEl = h("div", { className: "markdown-body" }, []);
 
-    contentEl.innerHTML = article as string;
+    contentEl.append(article);
 
     const footerEl = h("hr", { className: "post-separator" }, []);
     return h("article", {}, [contentEl, footerEl]);
   });
 }
 
-function renderMainContent(articlesPromise: Promise<Article[]>): HTMLElement {
+function renderMainContent(articlesPromise: Promise<DocumentFragment[]>): HTMLElement {
   const container = h("main", {}, [
     h("div", { className: "content" }, [])
   ]);
@@ -67,7 +65,7 @@ function renderMainContent(articlesPromise: Promise<Article[]>): HTMLElement {
   return container;
 }
 
-function renderApp(qotd: string, articlesPromise: Promise<Article[]>): HTMLElement {
+function renderApp(qotd: string, articlesPromise: Promise<DocumentFragment[]>): HTMLElement {
   return h("div", {}, [
     renderHeader(),
     renderContentPreface(),

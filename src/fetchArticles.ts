@@ -1,16 +1,14 @@
-import { Article } from "./types";
-
-async function fetchArticle(filepath: string): Promise<Article> {
+async function fetchArticle(filepath: string): Promise<DocumentFragment> {
   const response = await fetch(filepath);
   if (!response.ok) {
     throw new Error(`Failed to fetch article: ${response.statusText}`);
   }
 
   const raw = await response.text();
-  return raw;
+  return document.createRange().createContextualFragment(raw);
 }
 
-async function fetchArticles(csvPath: string): Promise<Article[]> {
+async function fetchArticles(csvPath: string): Promise<DocumentFragment[]> {
   const response = await fetch(csvPath);
   if (!response.ok) {
     throw new Error(`Failed to fetch articles list: ${response.statusText}`);
@@ -31,7 +29,7 @@ async function fetchArticles(csvPath: string): Promise<Article[]> {
     .map(async info => [await fetchArticle(info[0]), info[1]] as const);
 
   const unsorted = await Promise.all(articleFetchPromises);
-  return unsorted.sort((a, b) => new Date(b[1]).getTime() - new Date(a[1]).getTime()).map(article => article[0] as Article);
+  return unsorted.sort((a, b) => new Date(b[1]).getTime() - new Date(a[1]).getTime()).map(article => article[0] as DocumentFragment);
 }
 
 export { fetchArticles };
