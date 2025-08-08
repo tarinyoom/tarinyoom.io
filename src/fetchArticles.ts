@@ -1,13 +1,12 @@
 import { Article } from "./types";
 
-async function fetchArticle(filepath: string, date: string): Promise<Article> {
+async function fetchArticle(filepath: string): Promise<Article> {
   const response = await fetch(filepath);
   if (!response.ok) {
     throw new Error(`Failed to fetch article: ${response.statusText}`);
   }
 
   const raw = await response.text();
-  console.log(`Fetched article from ${filepath} with date ${date}: ${raw}`);
   return raw;
 }
 
@@ -29,10 +28,10 @@ async function fetchArticles(csvPath: string): Promise<Article[]> {
 
   const articleFetchPromises = articleInfo
     .map(info => ["/" + info[0], info[1]] as const)
-    .map(info => fetchArticle(info[0], info[1]));
+    .map(async info => [await fetchArticle(info[0]), info[1]] as const);
 
   const unsorted = await Promise.all(articleFetchPromises);
-  return unsorted.sort((a, b) => new Date(b[1]).getTime() - new Date(a[1]).getTime());
+  return unsorted.sort((a, b) => new Date(b[1]).getTime() - new Date(a[1]).getTime()).map(article => article[0] as Article);
 }
 
 export { fetchArticles };
