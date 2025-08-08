@@ -11,6 +11,27 @@ const publicDir = path.resolve('public');
 
 fs.mkdirSync(publicDir, { recursive: true });
 
+function ensureDir(dir) {
+  fs.mkdirSync(dir, { recursive: true });
+}
+
+function copyDirContents(srcDir, destDir) {
+  if (!fs.existsSync(srcDir)) return;
+  ensureDir(destDir);
+
+  for (const entry of fs.readdirSync(srcDir)) {
+    const srcPath = path.join(srcDir, entry);
+    const destPath = path.join(destDir, entry);
+    const stat = fs.statSync(srcPath);
+
+    if (stat.isDirectory()) {
+      copyDirContents(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
+}
+
 function imageToVideoHandler(_state, node) {
   const url = node.url || '';
   const alt = node.alt || '';
@@ -57,6 +78,11 @@ function imageToVideoHandler(_state, node) {
 }
 
 async function convertAll() {
+  // Copy assets first
+  copyDirContents(path.join(articlesDir, 'images'), path.join(publicDir, 'images'));
+  copyDirContents(path.join(articlesDir, 'videos'), path.join(publicDir, 'videos'));
+
+  // Convert markdown → HTML
   const files = fs.readdirSync(articlesDir).filter(f => f.endsWith('.md'));
 
   for (const file of files) {
