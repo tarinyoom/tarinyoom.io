@@ -1,51 +1,5 @@
 import { Article } from "./types";
 
-function parseRawArticle(raw: string, date: string): Article {
-  const match = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/m.exec(raw);
-  if (!match) {
-    throw new Error("Missing or invalid frontmatter");
-  }
-
-  const frontmatter = match[1];
-  const content = match[2].trim();
-
-  const lines = frontmatter.split("\n");
-  const data: Record<string, any> = {};
-
-  for (const line of lines) {
-    const [key, ...rest] = line.split(":");
-    if (!key || rest.length === 0) continue;
-
-    const rawValue = rest.join(":").trim();
-
-    let value: any;
-    if (rawValue.startsWith('"') && rawValue.endsWith('"')) {
-      value = rawValue.slice(1, -1); // remove quotes
-    } else if (rawValue.startsWith("[") && rawValue.endsWith("]")) {
-      value = rawValue
-        .slice(1, -1)
-        .split(",")
-        .map(s => s.trim().replace(/^"|"$/g, ""));
-    } else {
-      value = rawValue;
-    }
-
-    data[key.trim()] = value;
-  }
-
-  const { title, tags } = data;
-  if (typeof title !== "string" || !Array.isArray(tags)) {
-    throw new Error("Missing or invalid required fields in frontmatter");
-  }
-
-  return {
-    title,
-    date,
-    tags,
-    content,
-  };
-}
-
 async function fetchArticle(filepath: string, date: string): Promise<Article> {
   const response = await fetch(filepath);
   if (!response.ok) {
@@ -53,8 +7,8 @@ async function fetchArticle(filepath: string, date: string): Promise<Article> {
   }
 
   const raw = await response.text();
-  const article = parseRawArticle(raw, date);
-  return article;
+  console.log(`Fetched article from ${filepath} with date ${date}: ${raw}`);
+  return raw;
 }
 
 async function fetchArticles(csvPath: string): Promise<Article[]> {
@@ -74,11 +28,11 @@ async function fetchArticles(csvPath: string): Promise<Article[]> {
   });
 
   const articleFetchPromises = articleInfo
-    .map(info => ["/articles/" + info[0], info[1]] as const)
+    .map(info => ["/" + info[0], info[1]] as const)
     .map(info => fetchArticle(info[0], info[1]));
 
   const unsorted = await Promise.all(articleFetchPromises);
-  return unsorted.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return unsorted.sort((a, b) => new Date(b[1]).getTime() - new Date(a[1]).getTime());
 }
 
 export { fetchArticles };

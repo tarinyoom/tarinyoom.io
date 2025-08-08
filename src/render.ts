@@ -1,5 +1,3 @@
-import { marked } from "marked";
-
 import { Article } from "./types";
 
 function h<K extends keyof HTMLElementTagNameMap>(
@@ -40,37 +38,14 @@ function renderFooter(): HTMLElement {
   ]);
 }
 
-function formatArticleDate(dateStr: string): string {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  });
-}
-
 function renderArticles(articles: Article[]): HTMLElement[] {
   return articles.map(article => {
-    const titleEl = h("h2", {}, [article.title]);
-    const dateEl = h("p", { className: "date" }, [formatArticleDate(article.date)]);
     const contentEl = h("div", { className: "markdown-body" }, []);
+
+    contentEl.innerHTML = article as string;
+
     const footerEl = h("hr", { className: "post-separator" }, []);
-
-    const parsed = marked.parse(article.content);
-    if (typeof parsed === "string") {
-      contentEl.innerHTML = parsed;
-    } else {
-      parsed.then(html => {
-        contentEl.innerHTML = html;
-      });
-    }
-
-    return h("article", {}, [
-      titleEl,
-      dateEl,
-      contentEl,
-      footerEl
-    ]);
+    return h("article", {}, [contentEl, footerEl]);
   });
 }
 

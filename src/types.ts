@@ -1,8 +1,3 @@
-type Article = {
-  title: string;
-  date: string;
-  tags: string[];
-  content: string;
-};
+type Article = string;
 
 export type { Article };
