@@ -19,6 +19,6 @@ So far, I've implemented a simple particles-in-a-box example, using a library ca
 
 I've added gravity and some simple elastic collisions against invisible walls:
 
-<video src="videos/particles_in_a_box.webm" autoplay loop muted playsinline></video>
+![Particles in a box](videos/particles_in_a_box.webm)
 
 At this point it doesn't really look like a fluid, as much as a lot of tiny bouncing balls. The goal will be to implement [smoothed-particle hydrodynamics](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) (SPH), a technique for approximating the continuous properties of a fluid with discrete particles by interpolating between them via smooth kernel functions. Or so the lore goes.

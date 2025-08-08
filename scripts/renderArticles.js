@@ -11,6 +11,50 @@ const publicDir = path.resolve('public');
 
 fs.mkdirSync(publicDir, { recursive: true });
 
+// mdast -> hast handler that returns plain HAST (no `h`)
+function imageToVideoHandler(_state, node /*, parent */) {
+  const url = node.url || '';
+  const alt = node.alt || '';
+  const title = node.title || undefined;
+
+  console.log(`Processing image/video: ${url}`);
+
+  if (url.startsWith('videos/')) {
+    const ext = url.split('.').pop()?.toLowerCase();
+    const mime =
+      ext === 'webm' ? 'video/webm' :
+      ext === 'ogg'  ? 'video/ogg'  :
+                       'video/mp4';
+
+    return {
+      type: 'element',
+      tagName: 'video',
+      properties: { controls: true, playsinline: true },
+      children: [
+        {
+          type: 'element',
+          tagName: 'source',
+          properties: { src: url, type: mime },
+          children: []
+        },
+        ...(alt ? [{ type: 'text', value: alt }] : [])
+      ]
+    };
+  }
+
+  // Default: emit a normal <img>
+  const props = { src: url };
+  if (alt) props.alt = alt;
+  if (title) props.title = title;
+
+  return {
+    type: 'element',
+    tagName: 'img',
+    properties: props,
+    children: []
+  };
+}
+
 async function convertAll() {
   const files = fs.readdirSync(articlesDir).filter(f => f.endsWith('.md'));
 
@@ -21,19 +65,20 @@ async function convertAll() {
     const raw = fs.readFileSync(mdPath, 'utf8');
     const { content, data: frontmatter } = matter(raw);
 
-    // Build HTML body from markdown
     const bodyHtml = String(
       await unified()
         .use(remarkParse)
-        .use(remarkRehype)
+        .use(remarkRehype, {
+          handlers: {
+            image: imageToVideoHandler,
+          },
+        })
         .use(rehypeStringify)
         .process(content)
     );
 
-    // Frontmatter injection — defaults if missing
     const titleHtml = `<h2>${frontmatter.title || ''}</h2>`;
     const dateHtml = `<p class="date">${frontmatter.date || ''}</p>`;
-
     const finalHtml = `${titleHtml}\n${dateHtml}\n${bodyHtml}`;
 
     fs.writeFileSync(htmlPath, finalHtml);
