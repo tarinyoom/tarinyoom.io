@@ -12,7 +12,9 @@
   "devDependencies": {
     "@types/node": "^24.2.1",
     "gray-matter": "^4.0.3",
+    "rehype-katex": "^7.0.1",
     "rehype-stringify": "^10.0.1",
+    "remark-math": "^6.0.0",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
     "typescript": "^5.8.3",
@@ -20,5 +22,8 @@
     "unist-util-visit": "^5.0.0",
     "vite": "^7.0.5"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "katex": "^0.16.22"
+  }
 }

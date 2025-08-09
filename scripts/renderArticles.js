@@ -3,6 +3,8 @@ import path from 'node:path';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 import rehypeStringify from 'rehype-stringify';
 import matter from 'gray-matter';
 
@@ -95,10 +97,16 @@ async function convertAll() {
     const bodyHtml = String(
       await unified()
         .use(remarkParse)
+        .use(remarkMath, {
+          singleDollarTextMath: true,
+        })
         .use(remarkRehype, {
           handlers: {
             image: imageToVideoHandler,
           },
+        })
+        .use(rehypeKatex, {
+          strict: 'ignore'
         })
         .use(rehypeStringify)
         .process(content)
