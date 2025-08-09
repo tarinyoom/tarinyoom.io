@@ -1,4 +1,5 @@
 import 'katex/dist/katex.min.css';
+import './style.css';
 
 import { renderApp } from "./render";
 import { fetchArticles } from "./fetchArticles";
