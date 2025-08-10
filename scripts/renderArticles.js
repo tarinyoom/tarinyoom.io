@@ -114,7 +114,6 @@ async function convertAll() {
 
     const formattedDate = frontmatter.date
     ? new Date(frontmatter.date).toLocaleDateString(undefined, {
-        weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric'
