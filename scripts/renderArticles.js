@@ -112,8 +112,17 @@ async function convertAll() {
         .process(content)
     );
 
+    const formattedDate = frontmatter.date
+    ? new Date(frontmatter.date).toLocaleDateString(undefined, {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })
+    : '';
+
     const titleHtml = `<h2>${frontmatter.title || ''}</h2>`;
-    const dateHtml = `<p class="date">${frontmatter.date || ''}</p>`;
+    const dateHtml = `<p class="date">${formattedDate}</p>`;
     const finalHtml = `${titleHtml}\n${dateHtml}\n${bodyHtml}`;
 
     fs.writeFileSync(htmlPath, finalHtml);
