@@ -6,7 +6,7 @@ tags: [SPH]
 
 The core idea of SPH is to use values stored at discrete particles to model the differentiable functions used in partial differential equations (PDEs). We do this by interpolating between our stored values using a convolutional kernel, so that our differentiable function looks something like a weighted average of all nearby particles.
 
-For example, say we have a discrete set of points $P = \{p_1, \dots, p_n\} \subset \mathbb{R}^3$, and a pressure function defined over that set of points $\hat\rho: P \rightarrow \mathbb{R}$. We know what $\hat\rho(p_1)$ and $\hat\rho(p_2)$ are, but not $\hat\rho(q)$ for any $q \notin P$. Can we construct a differentiable pressure function $\rho$ defined over all of $\mathbb{R}^3$?
+For example, say we have a discrete set of points $X = \{x_1, \dots, x_n\} \subset \mathbb{R}^3$, and a pressure function defined over that set of points $\hat p: X \rightarrow \mathbb{R}$. We know what $\hat p(x_1)$ and $\hat p(x_2)$ are, but not $\hat p(y)$ for any $y \notin X$. Can we construct a differentiable pressure function $p$ defined over all of $\mathbb{R}^3$?
 
 The answer is yes, which I'll be implement and explain over the course of this project. The first step will be to implement a [convolutional kernel](https://en.wikipedia.org/wiki/Convolution), which will be the core mechanism that smooths our discrete values into continuous functions. Below is a visualization of that kernel affixed to a single point. No fluid physics yet, just some colors representing the value of the kernel as the particle travels through space.
 
