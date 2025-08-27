@@ -25,7 +25,15 @@ function renderHeader(): HTMLElement {
 
 function renderContentPreface(): HTMLElement {
   return h("div", { className: "content-preface" }, [
-    h("p", { }, ["My notes and opinions on software development."]),
+    h("p", { }, ["Some notes on what I'm up to."]),
+    h("p", { }, [
+      "Currently working on an SPH renderer. Demo at: ",
+      h("a", {
+        href: "https://sph.tarinyoom.io",
+        target: "_blank",
+        rel: "noopener noreferrer"
+      }, ["sph.tarinyoom.io ↗"])
+    ]),
     h("hr", { className: "post-separator" }, [])
   ]);
 }
