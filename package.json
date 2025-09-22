@@ -10,7 +10,7 @@
     "clean": "rm -rf dist public/*.html public/images public/videos"
   },
   "devDependencies": {
-    "@types/node": "^24.3.0",
+    "@types/node": "^24.5.2",
     "gray-matter": "^4.0.3",
     "rehype-katex": "^7.0.1",
     "rehype-stringify": "^10.0.1",
