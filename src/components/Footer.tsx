@@ -1,4 +1,5 @@
-import { Twitter, Github, Linkedin, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+import { SiGithub, SiLinkedin } from "react-icons/si";
 
 export function Footer() {
   return (
@@ -13,7 +14,7 @@ export function Footer() {
               className="text-muted-foreground transition-colors hover:text-foreground"
               aria-label="GitHub"
             >
-              <Github className="h-5 w-5" />
+              <SiGithub className="h-5 w-5" />
             </a>
             <a
               href="https://linkedin.com/in/adam-reynolds-246744201"
@@ -22,7 +23,7 @@ export function Footer() {
               className="text-muted-foreground transition-colors hover:text-foreground"
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-5 w-5" />
+              <SiLinkedin className="h-5 w-5" />
             </a>
             <a
               href="mailto:tarinyoom@proton.me"
