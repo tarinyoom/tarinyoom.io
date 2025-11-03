@@ -7,7 +7,7 @@ export function Header() {
         {/* Logo */}
         <div className="flex items-center gap-2">
           <Leaf className="h-6 w-6 text-primary" />
-          <span className="text-primary">Nature's Journal</span>
+          <span className="text-primary">tarinyoom.io</span>
         </div>
 
         {/* Navigation */}

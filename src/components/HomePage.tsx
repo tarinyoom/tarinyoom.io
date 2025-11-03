@@ -90,7 +90,7 @@ export function HomePage() {
         <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
           <div className="mx-auto max-w-6xl">
             <div className="mb-8">
-              <h2 className="text-foreground">Latest Articles</h2>
+              <h2 className="text-foreground">Articles</h2>
             </div>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {blogPosts.map((post) => (
