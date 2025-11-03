@@ -76,10 +76,15 @@ export function HomePage() {
       <section className="border-b border-border bg-gradient-to-b from-background to-muted/30 py-16 md:py-24">
         <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="mb-4 text-foreground">Welcome to Nature's Journal</h1>
+            <h1 className="mb-4 text-foreground">Welcome!</h1>
             <p className="text-muted-foreground">
-              A personal exploration of mindfulness, creativity, and sustainable living inspired by
-              the natural world.
+              Welcome to my blog. Below are some articles related to my interests at the intersection of math and software. I'm currently building an in-browser fluid dynamics simulation at:&nbsp;
+              <a
+                href="https://sph.tarinyoom.io"
+                target="_blank"
+                rel="noopener noreferrer"
+              >sph.tarinyoom.io
+              </a>
             </p>
           </div>
         </div>
