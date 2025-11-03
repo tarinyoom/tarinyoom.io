@@ -11,15 +11,13 @@ export function ContactPage() {
       <section className="py-12 md:py-16">
         <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
           <div className="mx-auto max-w-4xl">
-            <div className="grid gap-12 md:grid-cols-2">
+            <div className="grid gap-12 md:grid-cols-1">
               {/* Contact Info */}
               <div className="space-y-8">
                 <div>
                   <h2 className="mb-6 text-foreground">Let's Connect</h2>
                   <p className="text-muted-foreground">
-                    I'm always excited to connect with fellow nature enthusiasts, writers, and
-                    mindful living advocates. Feel free to reach out with questions, collaboration
-                    ideas, or just to say hello.
+                    Feel free to reach out with questions, collaboration ideas, or just to say hello.
                   </p>
                 </div>
 
@@ -30,7 +28,7 @@ export function ContactPage() {
                     </div>
                     <div>
                       <h3 className="mb-1 text-foreground">Email</h3>
-                      <p className="text-muted-foreground">hello@naturesjournal.com</p>
+                      <p className="text-muted-foreground">tarinyoom@proton.me</p>
                     </div>
                   </div>
 
@@ -41,14 +39,14 @@ export function ContactPage() {
                     <div>
                       <h3 className="mb-1 text-foreground">Location</h3>
                       <p className="text-muted-foreground">
-                        Pacific Northwest, USA
+                        Los Angeles, California, USA
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Contact Form */}
+              {/* Contact Form
               <div className="rounded-lg border border-border bg-card p-6 md:p-8">
                 <h2 className="mb-6 text-foreground">Send a Message</h2>
                 <form className="space-y-6">
@@ -97,7 +95,7 @@ export function ContactPage() {
                     Send Message
                   </Button>
                 </form>
-              </div>
+              </div>*/}
             </div>
           </div>
         </div>
