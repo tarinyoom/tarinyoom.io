@@ -5,10 +5,10 @@ import { Footer } from "./components/Footer";
 import { HomePage } from "./components/HomePage";
 import { AboutPage } from "./components/AboutPage";
 import { ContactPage } from "./components/ContactPage";
-import { fetchArticles, type BlogPost } from "./fetchArticles";
+import { fetchArticles, type ArticleSummary } from "./fetchArticles";
 
 export default function App() {
-  const [articles, setArticles] = useState<BlogPost[]>([]);
+  const [articles, setArticles] = useState<ArticleSummary[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

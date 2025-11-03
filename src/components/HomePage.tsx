@@ -1,8 +1,8 @@
 import { BlogPostCard } from "./BlogPostCard";
-import { type BlogPost } from "../fetchArticles";
+import { type ArticleSummary } from "../fetchArticles";
 
 interface HomePageProps {
-  articles: BlogPost[];
+  articles: ArticleSummary[];
 }
 
 export function HomePage({ articles }: HomePageProps) {

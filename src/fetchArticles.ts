@@ -1,4 +1,4 @@
-interface BlogPost {
+interface ArticleSummary {
   id: number;
   title: string;
   excerpt: string;
@@ -8,7 +8,15 @@ interface BlogPost {
   imageUrl: string;
 }
 
-async function fetchArticles(): Promise<BlogPost[]> {
+interface FullArticle {
+  id: number;
+  title: string;
+  date: string;
+  category: string;
+  htmlContent: string;
+}
+
+async function fetchArticles(): Promise<ArticleSummary[]> {
   // Fetch articles.csv
   const response = await fetch('/articles.csv');
   if (!response.ok) {
@@ -65,8 +73,8 @@ async function fetchArticles(): Promise<BlogPost[]> {
   // Sort by date (newest first)
   articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  // Convert to BlogPost format
-  const posts: BlogPost[] = articles.map((article, index) => ({
+  // Convert to ArticleSummary format
+  const posts: ArticleSummary[] = articles.map((article, index) => ({
     id: index + 1,
     title: article.title,
     excerpt: article.excerpt,
@@ -84,4 +92,4 @@ async function fetchArticles(): Promise<BlogPost[]> {
 }
 
 export { fetchArticles };
-export type { BlogPost };
+export type { ArticleSummary, FullArticle };
