@@ -1,34 +1,11 @@
 import { BlogPostCard } from "./BlogPostCard";
-import { useState, useEffect } from "react";
-import { fetchArticles, type BlogPost } from "../fetchArticles";
+import { type BlogPost } from "../fetchArticles";
 
-export function HomePage() {
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+interface HomePageProps {
+  articles: BlogPost[];
+}
 
-  useEffect(() => {
-    async function loadArticles() {
-      try {
-        const posts = await fetchArticles();
-        setBlogPosts(posts);
-      } catch (error) {
-        console.error('Error fetching articles:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadArticles();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-muted-foreground">Loading articles...</div>
-      </div>
-    );
-  }
-
+export function HomePage({ articles }: HomePageProps) {
   return (
     <div className="flex-1">
       {/* Hero Section */}
@@ -57,7 +34,7 @@ export function HomePage() {
               <h2 className="text-foreground">Articles</h2>
             </div>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {blogPosts.map((post) => (
+              {articles.map((post) => (
                 <BlogPostCard
                   key={post.id}
                   title={post.title}
