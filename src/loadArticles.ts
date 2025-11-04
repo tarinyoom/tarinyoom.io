@@ -1,9 +1,21 @@
 import { type ComponentType } from 'react';
 
+// Import metadata
+import articlesMetadata from '../articles/metadata.json';
+
+// Import MDX components
+import Article1 from '../articles/a001_hello_world.mdx';
+import Article2 from '../articles/a002_dependency_shedding.mdx';
+import Article3 from '../articles/a003_browser_dynamics.mdx';
+import Article4 from '../articles/a004_kernel_visualization.mdx';
+import Article5 from '../articles/a005_under_pressure.mdx';
+
 export interface ArticleMetadata {
+  id: number;
   title: string;
   date: string;
-  tags?: string[];
+  tags: string[];
+  summary: string;
 }
 
 export interface ArticleSummary {
@@ -24,7 +36,6 @@ export interface FullArticle {
   category: string;
   slug: string;
   Component: ComponentType;
-  metadata: ArticleMetadata;
 }
 
 function generateSlug(title: string): string {
@@ -42,41 +53,42 @@ function formatDate(dateString: string): string {
   });
 }
 
-// Import all MDX files from articles directory
-const articleModules = import.meta.glob<{
-  default: ComponentType;
-  frontmatter: ArticleMetadata;
-}>('../articles/*.mdx', { eager: true });
+// Map article IDs to their MDX components
+const articleComponents: Record<number, ComponentType> = {
+  1: Article1,
+  2: Article2,
+  3: Article3,
+  4: Article4,
+  5: Article5,
+};
 
 export function loadAllArticles(): [FullArticle, ArticleSummary][] {
-  const articles = Object.entries(articleModules).map(([path, module], index) => {
-    const metadata = module.frontmatter;
-    const Component = module.default;
+  const articles = (articlesMetadata as ArticleMetadata[]).map((metadata) => {
+    const Component = articleComponents[metadata.id];
+
+    if (!Component) {
+      throw new Error(`No component found for article ID ${metadata.id}`);
+    }
 
     const slug = generateSlug(metadata.title);
     const formattedDate = formatDate(metadata.date);
 
-    // Extract first paragraph as excerpt
-    // Since we can't easily parse MDX content, we'll use a placeholder for now
-    const excerpt = `Read about ${metadata.title.toLowerCase()}`;
-
     const fullArticle: FullArticle = {
-      id: index + 1,
+      id: metadata.id,
       title: metadata.title,
       date: formattedDate,
-      category: metadata.tags?.[0] || "Article",
+      category: metadata.tags[0] || "Article",
       slug,
       Component,
-      metadata,
     };
 
     const summary: ArticleSummary = {
-      id: index + 1,
+      id: metadata.id,
       title: metadata.title,
-      excerpt,
+      excerpt: metadata.summary,
       date: formattedDate,
       readTime: "5 min read",
-      category: metadata.tags?.[0] || "Article",
+      category: metadata.tags[0] || "Article",
       imageUrl: "https://images.unsplash.com/photo-1600340053706-32d1278206ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb3Jlc3QlMjBzdW5saWdodHxlbnwxfHx8fDE3NjIxMzMwODF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
       slug,
     };

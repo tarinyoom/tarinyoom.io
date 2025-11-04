@@ -2,12 +2,10 @@
   "name": "tarinyoom.io",
   "version": "1.0.0",
   "scripts": {
-    "predev": "node scripts/renderArticles.js",
     "dev": "vite",
-    "prebuild": "node scripts/renderArticles.js",
     "build": "vite build",
     "preview": "vite preview",
-    "clean": "rm -rf dist public/*.html public/images public/videos"
+    "clean": "rm -rf dist"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.16",
