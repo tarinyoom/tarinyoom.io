@@ -16,7 +16,7 @@ export function ArticlePage({ article }: ArticlePageProps) {
           </h1>
           <p className="text-lg text-muted-foreground">{date}</p>
         </header>
-        <div className="prose prose-lg dark:prose-invert max-w-none">
+        <div className="prose prose-lg dark:prose-invert max-w-none [&_p]:mb-6">
           <Component />
         </div>
       </article>
