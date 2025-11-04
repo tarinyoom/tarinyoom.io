@@ -20,12 +20,6 @@ export function Header() {
             Home
           </Link>
           <Link
-            to="/about"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            About
-          </Link>
-          <Link
             to="/contact"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
