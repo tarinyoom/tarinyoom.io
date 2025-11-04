@@ -16,6 +16,7 @@ export interface ArticleMetadata {
   date: string;
   tags: string[];
   summary: string;
+  image: string;
 }
 
 export interface ArticleSummary {
@@ -89,7 +90,7 @@ export function loadAllArticles(): [FullArticle, ArticleSummary][] {
       date: formattedDate,
       readTime: "5 min read",
       category: metadata.tags[0] || "Article",
-      imageUrl: "https://images.unsplash.com/photo-1600340053706-32d1278206ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb3Jlc3QlMjBzdW5saWdodHxlbnwxfHx8fDE3NjIxMzMwODF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      imageUrl: metadata.image,
       slug,
     };
 
