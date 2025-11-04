@@ -31,7 +31,6 @@ jobs:
         with:
           name: dist
           path: dist/
-          retention-days: 1
 
   deploy:
     name: Deploy to Cloudflare Pages
