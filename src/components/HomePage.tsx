@@ -43,6 +43,7 @@ export function HomePage({ articles }: HomePageProps) {
                   readTime={post.readTime}
                   category={post.category}
                   imageUrl={post.imageUrl}
+                  slug={post.slug}
                 />
               ))}
             </div>

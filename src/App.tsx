@@ -5,18 +5,22 @@ import { Footer } from "./components/Footer";
 import { HomePage } from "./components/HomePage";
 import { AboutPage } from "./components/AboutPage";
 import { ContactPage } from "./components/ContactPage";
-import { fetchArticles, type ArticleSummary } from "./fetchArticles";
+import { ArticlePage } from "./components/ArticlePage";
+import { fetchArticles, type ArticleSummary, type FullArticle } from "./fetchArticles";
 
 export default function App() {
   const [articles, setArticles] = useState<ArticleSummary[]>([]);
+  const [fullArticles, setFullArticles] = useState<FullArticle[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadArticles() {
       try {
         const articlePairs = await fetchArticles();
-        // Extract just the summaries from the pairs
+        // Extract full articles and summaries from the pairs
+        const fullArts = articlePairs.map(([full, _]) => full);
         const summaries = articlePairs.map(([_, summary]) => summary);
+        setFullArticles(fullArts);
         setArticles(summaries);
       } catch (error) {
         console.error('Error fetching articles:', error);
@@ -45,6 +49,13 @@ export default function App() {
             <Route path="/" element={<HomePage articles={articles} />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            {fullArticles.map((article) => (
+              <Route
+                key={article.slug}
+                path={`/articles/${article.slug}`}
+                element={<ArticlePage article={article} />}
+              />
+            ))}
           </Routes>
         </main>
         <Footer />

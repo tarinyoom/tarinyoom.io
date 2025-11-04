@@ -6,6 +6,7 @@ interface ArticleSummary {
   readTime: string;
   category: string;
   imageUrl: string;
+  slug: string;
 }
 
 interface FullArticle {
@@ -14,6 +15,14 @@ interface FullArticle {
   date: string;
   category: string;
   htmlContent: string;
+  slug: string;
+}
+
+function generateSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 async function fetchArticles(): Promise<[FullArticle, ArticleSummary][]> {
@@ -82,12 +91,15 @@ async function fetchArticles(): Promise<[FullArticle, ArticleSummary][]> {
       year: 'numeric'
     });
 
+    const slug = generateSlug(article.title);
+
     const fullArticle: FullArticle = {
       id: index + 1,
       title: article.title,
       date: formattedDate,
       category: "Article",
-      htmlContent: article.htmlContent
+      htmlContent: article.htmlContent,
+      slug: slug
     };
 
     const summary: ArticleSummary = {
@@ -97,7 +109,8 @@ async function fetchArticles(): Promise<[FullArticle, ArticleSummary][]> {
       date: formattedDate,
       readTime: "5 min read",
       category: "Article",
-      imageUrl: "https://images.unsplash.com/photo-1600340053706-32d1278206ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb3Jlc3QlMjBzdW5saWdodHxlbnwxfHx8fDE3NjIxMzMwODF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+      imageUrl: "https://images.unsplash.com/photo-1600340053706-32d1278206ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb3Jlc3QlMjBzdW5saWdodHxlbnwxfHx8fDE3NjIxMzMwODF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      slug: slug
     };
 
     return [fullArticle, summary];

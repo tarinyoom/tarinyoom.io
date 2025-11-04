@@ -1,4 +1,5 @@
 import { Calendar, Clock } from "lucide-react";
+import { Link } from "react-router";
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -10,6 +11,7 @@ interface BlogPostCardProps {
   readTime: string;
   category: string;
   imageUrl: string;
+  slug: string;
 }
 
 export function BlogPostCard({
@@ -19,9 +21,11 @@ export function BlogPostCard({
   readTime,
   category,
   imageUrl,
+  slug,
 }: BlogPostCardProps) {
   return (
-    <Card className="overflow-hidden transition-shadow hover:shadow-lg">
+    <Link to={`/articles/${slug}`} className="block">
+      <Card className="overflow-hidden transition-shadow hover:shadow-lg">
       <div className="aspect-[16/9] overflow-hidden">
         <ImageWithFallback
           src={imageUrl}
@@ -49,5 +53,6 @@ export function BlogPostCard({
         </div>
       </CardContent>
     </Card>
+    </Link>
   );
 }
