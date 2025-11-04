@@ -1,5 +1,5 @@
 import { BlogPostCard } from "./BlogPostCard";
-import { type ArticleSummary } from "../fetchArticles";
+import { type ArticleSummary } from "../loadArticles";
 
 interface HomePageProps {
   articles: ArticleSummary[];

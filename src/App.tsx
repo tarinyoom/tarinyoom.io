@@ -1,44 +1,22 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { HomePage } from "./components/HomePage";
 import { AboutPage } from "./components/AboutPage";
 import { ContactPage } from "./components/ContactPage";
 import { ArticlePage } from "./components/ArticlePage";
-import { fetchArticles, type ArticleSummary, type FullArticle } from "./fetchArticles";
+import { loadAllArticles, type ArticleSummary, type FullArticle } from "./loadArticles";
 
 export default function App() {
-  const [articles, setArticles] = useState<ArticleSummary[]>([]);
-  const [fullArticles, setFullArticles] = useState<FullArticle[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function loadArticles() {
-      try {
-        const articlePairs = await fetchArticles();
-        // Extract full articles and summaries from the pairs
-        const fullArts = articlePairs.map(([full, _]) => full);
-        const summaries = articlePairs.map(([_, summary]) => summary);
-        setFullArticles(fullArts);
-        setArticles(summaries);
-      } catch (error) {
-        console.error('Error fetching articles:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadArticles();
+  // Load articles synchronously since they're bundled with the app
+  const { articles, fullArticles } = useMemo(() => {
+    const articlePairs = loadAllArticles();
+    return {
+      fullArticles: articlePairs.map(([full, _]) => full),
+      articles: articlePairs.map(([_, summary]) => summary),
+    };
   }, []);
-
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-muted-foreground">Loading articles...</div>
-      </div>
-    );
-  }
 
   return (
     <BrowserRouter>
