@@ -2,7 +2,9 @@
   "name": "tarinyoom.io",
   "version": "1.0.0",
   "scripts": {
+    "predev": "mkdir -p public/images public/videos && cp -r articles/images/* public/images/ && cp -r articles/videos/* public/videos/",
     "dev": "vite",
+    "prebuild": "mkdir -p public/images public/videos && cp -r articles/images/* public/images/ && cp -r articles/videos/* public/videos/",
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist"

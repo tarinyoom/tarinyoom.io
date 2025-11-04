@@ -5,7 +5,7 @@
     "date": "2025-07-21",
     "tags": ["thoughts"],
     "summary": "Welcome to my dev journal!",
-    "image": "/images/old_site.png"
+    "image": "/images/seedling.png"
   },
   {
     "id": 2,
@@ -21,7 +21,7 @@
     "date": "2025-07-29",
     "tags": ["SPH"],
     "summary": "This is my first post on implementing fluid dynamics in the browser. The goal is to implement a real-time fluid solver in my browser. Previously, I'd implemented an online ODE integrator for comparing explicit Euler, implicit Euler, and RK4 integration methods for a particle in a gravity field.",
-    "image": "/images/old_site.png"
+    "image": "/images/particles.png"
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "date": "2025-08-09",
     "tags": ["SPH"],
     "summary": "The core idea of SPH is to use values stored at discrete particles to model the differentiable functions used in partial differential equations (PDEs). We do this by interpolating between our stored values using a convolutional kernel, so that our differentiable function looks something like a weighted average of all nearby particles.",
-    "image": "/images/old_site.png"
+    "image": "/images/kernel.png"
   },
   {
     "id": 5,
@@ -37,6 +37,6 @@
     "date": "2025-08-23",
     "tags": ["SPH"],
     "summary": "This is a continuation of my N-part series on getting this SPH renderer working. My goal here is to model some kind of liquid. SPH is a technique that supposedly models water flow pretty well. So we'll see how well this works in the browser at interactive rates.",
-    "image": "/images/old_site.png"
+    "image": "/images/ns_equations.png"
   }
 ]
