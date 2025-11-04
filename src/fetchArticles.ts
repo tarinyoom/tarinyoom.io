@@ -16,7 +16,7 @@ interface FullArticle {
   htmlContent: string;
 }
 
-async function fetchArticles(): Promise<ArticleSummary[]> {
+async function fetchArticles(): Promise<[FullArticle, ArticleSummary][]> {
   // Fetch articles.csv
   const response = await fetch('/articles.csv');
   if (!response.ok) {
@@ -64,7 +64,8 @@ async function fetchArticles(): Promise<ArticleSummary[]> {
       name,
       date,
       title,
-      excerpt
+      excerpt,
+      htmlContent: html
     };
   });
 
@@ -73,22 +74,36 @@ async function fetchArticles(): Promise<ArticleSummary[]> {
   // Sort by date (newest first)
   articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  // Convert to ArticleSummary format
-  const posts: ArticleSummary[] = articles.map((article, index) => ({
-    id: index + 1,
-    title: article.title,
-    excerpt: article.excerpt,
-    date: new Date(article.date).toLocaleDateString('en-US', {
+  // Convert to (FullArticle, ArticleSummary) pairs
+  const pairs: [FullArticle, ArticleSummary][] = articles.map((article, index) => {
+    const formattedDate = new Date(article.date).toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
       year: 'numeric'
-    }),
-    readTime: "5 min read",
-    category: "Article",
-    imageUrl: "https://images.unsplash.com/photo-1600340053706-32d1278206ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb3Jlc3QlMjBzdW5saWdodHxlbnwxfHx8fDE3NjIxMzMwODF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-  }));
+    });
 
-  return posts;
+    const fullArticle: FullArticle = {
+      id: index + 1,
+      title: article.title,
+      date: formattedDate,
+      category: "Article",
+      htmlContent: article.htmlContent
+    };
+
+    const summary: ArticleSummary = {
+      id: index + 1,
+      title: article.title,
+      excerpt: article.excerpt,
+      date: formattedDate,
+      readTime: "5 min read",
+      category: "Article",
+      imageUrl: "https://images.unsplash.com/photo-1600340053706-32d1278206ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb3Jlc3QlMjBzdW5saWdodHxlbnwxfHx8fDE3NjIxMzMwODF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+    };
+
+    return [fullArticle, summary];
+  });
+
+  return pairs;
 }
 
 export { fetchArticles };

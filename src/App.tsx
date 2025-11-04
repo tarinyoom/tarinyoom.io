@@ -14,8 +14,10 @@ export default function App() {
   useEffect(() => {
     async function loadArticles() {
       try {
-        const posts = await fetchArticles();
-        setArticles(posts);
+        const articlePairs = await fetchArticles();
+        // Extract just the summaries from the pairs
+        const summaries = articlePairs.map(([_, summary]) => summary);
+        setArticles(summaries);
       } catch (error) {
         console.error('Error fetching articles:', error);
       } finally {
