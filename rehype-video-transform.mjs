@@ -19,6 +19,7 @@ export default function rehypeVideoTransform() {
           node.properties.muted = true;
           node.properties.playsInline = true;
           node.properties.autoplay = true;
+          node.properties.style = 'display: block; margin: 2rem auto; max-width: 80%; width: auto;';
 
           // Keep the alt text as a title attribute for accessibility
           if (node.properties.alt) {
