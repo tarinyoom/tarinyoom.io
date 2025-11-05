@@ -6,6 +6,7 @@ import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
+import rehypeVideoTransform from './rehype-video-transform.mjs';
 
 export default defineConfig({
   root: '.',
@@ -17,7 +18,7 @@ export default defineConfig({
         remarkMath,
         remarkGfm,
       ],
-      rehypePlugins: [rehypeKatex],
+      rehypePlugins: [rehypeKatex, rehypeVideoTransform],
     })},
     react(),
   ],
