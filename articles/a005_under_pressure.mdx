@@ -56,5 +56,3 @@ So we already get some fluid-like effects. We see our fluid flowing from the den
 It also seems to be gaining energy, which might be fixed by implementing viscosity. That seems like relatively low-hanging fruit.
 
 This doesn't look that incompressible though, especially looking at the bottom left. The wave-like behavior in the lower left looks fluid-like, which is good, but is showing pressure waves, which we don't want in our incompressible fluid. In terms of our mathematical equations, we imposed our incompressibility as a zero-divergence constraint, and chose an EoS that could somewhat respect that constraint. But that EoS may need to be refined.
-
-[live demo](https://sph.tarinyoom.io)
