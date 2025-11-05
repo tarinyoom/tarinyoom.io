@@ -33,11 +33,11 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage articles={articles} />,
-      },
+      },/*
       {
         path: "about",
         element: <AboutPage />,
-      },
+      },*/
       {
         path: "contact",
         element: <ContactPage />,
