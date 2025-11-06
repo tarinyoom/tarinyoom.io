@@ -4,7 +4,7 @@ import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
-interface BlogPostCardProps {
+interface ArticlePreviewCardProps {
   title: string;
   excerpt: string;
   date: string;
@@ -14,7 +14,7 @@ interface BlogPostCardProps {
   slug: string;
 }
 
-export function BlogPostCard({
+export function ArticlePreviewCard({
   title,
   excerpt,
   date,
@@ -22,7 +22,7 @@ export function BlogPostCard({
   category,
   imageUrl,
   slug,
-}: BlogPostCardProps) {
+}: ArticlePreviewCardProps) {
   return (
     <Link to={`/articles/${slug}`} className="block">
       <Card className="flex h-full w-full flex-col overflow-hidden transition-shadow hover:shadow-lg">

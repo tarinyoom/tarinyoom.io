@@ -1,4 +1,4 @@
-import { BlogPostCard } from "./BlogPostCard";
+import { ArticlePreviewCard } from "./ArticlePreviewCard";
 import { type ArticleSummary } from "../loadArticles";
 
 interface HomePageProps {
@@ -35,7 +35,7 @@ export function HomePage({ articles }: HomePageProps) {
             </div>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {articles.map((post) => (
-                <BlogPostCard
+                <ArticlePreviewCard
                   key={post.id}
                   title={post.title}
                   excerpt={post.excerpt}
