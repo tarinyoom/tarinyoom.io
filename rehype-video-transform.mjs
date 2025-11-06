@@ -8,7 +8,13 @@ export default function rehypeVideoTransform() {
   return (tree) => {
     visit(tree, 'element', (node) => {
       if (node.tagName === 'img' && node.properties?.src) {
-        const src = node.properties.src;
+        let src = node.properties.src;
+
+        // Prepend / to relative paths for images and videos
+        if ((src.startsWith('images/') || src.startsWith('videos/')) && !src.startsWith('/')) {
+          src = '/' + src;
+          node.properties.src = src;
+        }
 
         // Check if the src points to a video file
         if (src.startsWith('videos/') || src.includes('/videos/')) {
