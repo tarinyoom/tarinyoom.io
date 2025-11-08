@@ -17,6 +17,7 @@ export interface ArticleMetadata {
   tags: string[];
   summary: string;
   image: string;
+  readTimeMinutes: number;
 }
 
 export interface ArticleSummary {
@@ -88,7 +89,7 @@ export function loadAllArticles(): [FullArticle, ArticleSummary][] {
       title: metadata.title,
       excerpt: metadata.summary,
       date: formattedDate,
-      readTime: "5 min read",
+      readTime: `${metadata.readTimeMinutes} min read`,
       category: metadata.tags[0] || "Article",
       imageUrl: metadata.image,
       slug,
