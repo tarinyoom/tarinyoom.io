@@ -14,7 +14,7 @@ export function HomePage({ articles }: HomePageProps) {
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-4 text-foreground">Welcome!</h1>
             <p className="text-muted-foreground">
-              Welcome to my blog. Below are some articles related to my interests at the intersection of math and software. I'm currently building an in-browser fluid dynamics simulation at:&nbsp;
+              A personal blog for some personal projects. I'm interested physical simulation, and am working on an Wasm-based fluid solver at:&nbsp;
               <a
                 href="https://sph.tarinyoom.io"
                 target="_blank"
