@@ -2,21 +2,28 @@
   "name": "tarinyoom.io",
   "version": "1.0.0",
   "scripts": {
-    "predev": "node scripts/renderArticles.js",
+    "predev": "mkdir -p public/images public/videos && cp -r articles/images/* public/images/ && cp -r articles/videos/* public/videos/",
     "dev": "vite",
-    "prebuild": "node scripts/renderArticles.js",
+    "prebuild": "mkdir -p public/images public/videos && cp -r articles/images/* public/images/ && cp -r articles/videos/* public/videos/",
     "build": "vite build",
     "preview": "vite preview",
-    "clean": "rm -rf dist public/*.html public/images public/videos"
+    "clean": "rm -rf dist"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.16",
     "@types/node": "^24.3.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.0",
+    "autoprefixer": "^10.4.21",
     "gray-matter": "^4.0.3",
+    "postcss": "^8.5.6",
     "rehype-katex": "^7.0.1",
     "rehype-stringify": "^10.0.1",
     "remark-math": "^6.0.0",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
+    "tailwindcss": "^4.1.16",
     "typescript": "^5.9.2",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
@@ -24,6 +31,20 @@
   },
   "type": "module",
   "dependencies": {
-    "katex": "^0.16.22"
+    "@mdx-js/rollup": "^3.1.1",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "katex": "^0.16.22",
+    "lucide-react": "^0.552.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-icons": "^5.5.0",
+    "react-router": "^7.9.5",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-mdx-frontmatter": "^5.2.0",
+    "tailwind-merge": "^3.3.1"
   }
 }
