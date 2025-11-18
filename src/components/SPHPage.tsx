@@ -31,6 +31,7 @@ export function SPHPage() {
       context.configure({
         device,
         format: presentationFormat,
+        alphaMode: 'premultiplied',
       });
 
       // Vertex shader
@@ -91,7 +92,7 @@ export function SPHPage() {
           colorAttachments: [
             {
               view: textureView,
-              clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 1.0 },
+              clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 },
               loadOp: 'clear',
               storeOp: 'store',
             },
@@ -119,7 +120,6 @@ export function SPHPage() {
         ref={canvasRef}
         width={800}
         height={600}
-        className="border border-gray-300"
       />
     </div>
   );
