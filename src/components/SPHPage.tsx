@@ -36,22 +36,59 @@ export function SPHPage() {
 
       // Vertex shader
       const vertexShaderCode = `
+        struct VSOut {
+          @builtin(position) position : vec4f,
+          @location(0) localPos : vec2f,
+        };
+
         @vertex
-        fn main(@builtin(vertex_index) vertexIndex: u32) -> @builtin(position) vec4f {
-          var pos = array<vec2f, 3>(
-            vec2f(0.0, 0.5),
-            vec2f(-0.5, -0.5),
-            vec2f(0.5, -0.5)
+        fn main(
+          @builtin(vertex_index) vertexIndex : u32,
+          @builtin(instance_index) instanceIndex : u32,
+        ) -> VSOut {
+          // 2 triangles forming a quad in local space [-1, 1] x [-1, 1]
+          var quad = array<vec2f, 6>(
+            vec2f(-1.0, -1.0),
+            vec2f( 1.0, -1.0),
+            vec2f(-1.0,  1.0),
+            vec2f(-1.0,  1.0),
+            vec2f( 1.0, -1.0),
+            vec2f( 1.0,  1.0),
           );
-          return vec4f(pos[vertexIndex], 0.0, 1.0);
+
+          // Grid config
+          let gridSize : u32 = 10u;      // 10 x 10
+          let gx = f32(instanceIndex % gridSize);
+          let gy = f32(instanceIndex / gridSize);
+
+          // Size of each cell in NDC (approx)
+          let cellSize = 2.0 / f32(gridSize);
+          let radius   = cellSize * 0.4; // circle radius (fraction of cell)
+
+          // Compute center of this instance in NDC
+          let center = vec2f(
+            -1.0 + cellSize * (gx + 0.5),
+            -1.0 + cellSize * (gy + 0.5)
+          );
+
+          let local = quad[vertexIndex] * radius; // offset from center
+          var out : VSOut;
+          out.localPos = quad[vertexIndex];      // in [-1, 1]^2 for circle test
+          out.position = vec4f(center + local, 0.0, 1.0);
+          return out;
         }
       `;
 
       // Fragment shader
       const fragmentShaderCode = `
         @fragment
-        fn main() -> @location(0) vec4f {
-          return vec4f(1.0, 0.5, 0.2, 1.0);
+        fn main(@location(0) localPos : vec2f) -> @location(0) vec4f {
+          let r = length(localPos); // distance from quad center in [-1,1]^2
+          if (r > 1.0) {
+            discard; // outside unit circle -> transparent
+          }
+
+          return vec4f(0.2, 0.7, 1.0, 1.0); // color of the circle
         }
       `;
 
@@ -101,7 +138,8 @@ export function SPHPage() {
 
         const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
         passEncoder.setPipeline(pipeline);
-        passEncoder.draw(3, 1, 0, 0);
+        // 6 vertices per quad, 100 instances (10x10 grid)
+        passEncoder.draw(6, 100, 0, 0);
         passEncoder.end();
 
         device.queue.submit([commandEncoder.finish()]);
