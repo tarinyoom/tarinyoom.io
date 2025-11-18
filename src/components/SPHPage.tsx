@@ -114,13 +114,19 @@ export function SPHPage() {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">SPH</h1>
-      <canvas
-        ref={canvasRef}
-        width={800}
-        height={600}
-      />
+    <div className="flex-1">
+      <div className="mx-auto w-full max-w-4xl px-4 py-12 md:px-8 md:py-16">
+        <header className="mb-8 border-b border-border pb-8">
+          <h1 className="mb-2 text-4xl text-foreground md:text-5xl">
+            SPH
+          </h1>
+        </header>
+        <canvas
+          ref={canvasRef}
+          width={800}
+          height={600}
+        />
+      </div>
     </div>
   );
 }
