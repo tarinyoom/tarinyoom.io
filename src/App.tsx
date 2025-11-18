@@ -5,7 +5,7 @@ import { HomePage } from "./components/HomePage";
 import { AboutPage } from "./components/AboutPage";
 import { ContactPage } from "./components/ContactPage";
 import { ArticlePage } from "./components/ArticlePage";
-import { WebGPUPage } from "./components/WebGPUPage";
+import { SPHPage } from "./components/SPHPage";
 import { loadAllArticles } from "./loadArticles";
 
 // Load articles synchronously since they're bundled with the app
@@ -44,8 +44,8 @@ const router = createBrowserRouter([
         element: <ContactPage />,
       },
       {
-        path: "webgpu",
-        element: <WebGPUPage />,
+        path: "sph",
+        element: <SPHPage />,
       },
       ...fullArticles.map((article) => ({
         path: `articles/${article.slug}`,

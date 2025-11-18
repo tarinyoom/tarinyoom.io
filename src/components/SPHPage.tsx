@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export function WebGPUPage() {
+export function SPHPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -114,7 +114,7 @@ export function WebGPUPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">WebGPU Triangle</h1>
+      <h1 className="text-3xl font-bold mb-6">SPH</h1>
       <canvas
         ref={canvasRef}
         width={800}
