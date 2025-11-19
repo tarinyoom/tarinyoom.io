@@ -5,6 +5,8 @@ export function SPHPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    let renderer: Awaited<ReturnType<typeof initSPHRenderer>> | null = null;
+
     const initWebGPU = async () => {
       if (!canvasRef.current) return;
 
@@ -27,11 +29,19 @@ export function SPHPage() {
         return;
       }
 
+      // Get preferred format from browser API
+      const preferredFormat = navigator.gpu.getPreferredCanvasFormat();
+
       // Initialize the SPH renderer with the required WebGPU objects
-      await initSPHRenderer({ canvas, adapter, context });
+      renderer = await initSPHRenderer({ adapter, context, preferredFormat });
     };
 
     initWebGPU().catch(console.error);
+
+    // Cleanup on unmount
+    return () => {
+      renderer?.destroy();
+    };
   }, []);
 
   return (

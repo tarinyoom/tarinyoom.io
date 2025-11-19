@@ -2,20 +2,24 @@ import vertexShaderCode from './shaders/sph.vert.wgsl?raw';
 import fragmentShaderCode from './shaders/sph.frag.wgsl?raw';
 
 export interface SPHRendererConfig {
-  canvas: HTMLCanvasElement;
   adapter: GPUAdapter;
   context: GPUCanvasContext;
+  preferredFormat: GPUTextureFormat;
 }
 
-export async function initSPHRenderer(config: SPHRendererConfig): Promise<void> {
-  const { canvas, adapter, context } = config;
+export interface SPHRenderer {
+  render: () => void;
+  destroy: () => void;
+}
+
+export async function initSPHRenderer(config: SPHRendererConfig): Promise<SPHRenderer> {
+  const { adapter, context, preferredFormat } = config;
 
   const device = await adapter.requestDevice();
 
-  const presentationFormat = navigator.gpu.getPreferredCanvasFormat();
   context.configure({
     device,
-    format: presentationFormat,
+    format: preferredFormat,
     alphaMode: 'premultiplied',
   });
 
@@ -38,7 +42,7 @@ export async function initSPHRenderer(config: SPHRendererConfig): Promise<void> 
       entryPoint: 'main',
       targets: [
         {
-          format: presentationFormat,
+          format: preferredFormat,
         },
       ],
     },
@@ -72,5 +76,16 @@ export async function initSPHRenderer(config: SPHRendererConfig): Promise<void> 
     device.queue.submit([commandEncoder.finish()]);
   };
 
+  // Cleanup function
+  const destroy = () => {
+    device.destroy();
+  };
+
+  // Initial render
   render();
+
+  return {
+    render,
+    destroy,
+  };
 }
