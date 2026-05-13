@@ -3,10 +3,6 @@ title: "Dependency Shedding"
 date: 2025-07-22
 tags: [thoughts]
 summary: "This is the second time I've set up a personal site. Previously, I had a simple website I'd made with a tool called create-react-app, with components from MaterialUI. It had a few cards pointing to personal projects I've worked on in the past."
-cover:
-  image: /images/old_site.png
-  alt: "Old personal website"
-  relative: false
 ---
 
 This is the second time I've set up a personal site. Previously, I had a simple website I'd made with a tool called [*create-react-app*](https://create-react-app.dev/docs/getting-started/), with components from [MaterialUI](https://mui.com/material-ui/).

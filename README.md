@@ -2,12 +2,12 @@
 
 Available at [https://tarinyoom.io/](https://www.tarinyoom.io/).
 
-Built with [Hugo](https://gohugo.io/) using the [PaperMod](https://github.com/adityatelange/hugo-PaperMod) theme (pulled in as a Hugo Module). Deployed to Cloudflare Pages via GitHub Actions.
+Built with [Hugo](https://gohugo.io/). Two pages total: a long-form stream of all posts at `/`, and a contact page at `/contact/`. Custom minimal templates — no external theme. Deployed to Cloudflare Pages via GitHub Actions.
 
 ## Local development
 
 ```sh
-hugo server -D
+hugo server
 ```
 
 ## Build
@@ -20,8 +20,17 @@ Output goes to `public/`.
 
 ## Adding a post
 
-```sh
-hugo new content posts/my-new-post.md
+Drop a markdown file in `content/posts/`. Required frontmatter:
+
+```yaml
+---
+title: "My Post"
+date: 2026-01-01
+tags: [thoughts]
+math: true   # optional — only set if the post uses $...$ or $$...$$
+---
 ```
 
-For posts with math, set `math: true` in the frontmatter to load KaTeX. Use the `{{</* video src="/videos/foo.webm" caption="..." */>}}` shortcode for video embeds.
+Posts don't get their own URL — they're rendered inline on the home page, with an anchor at `#<filename>` (e.g. `/#my-post`).
+
+Use the `{{</* video src="/videos/foo.webm" caption="..." */>}}` shortcode for video embeds. Drop images/videos in `static/images/` and `static/videos/`; reference them with absolute paths starting with `/`.

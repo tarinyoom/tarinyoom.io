@@ -3,10 +3,6 @@ title: "Hello, World!"
 date: 2025-07-21
 tags: [thoughts]
 summary: "Welcome to my dev journal!"
-cover:
-  image: /images/seedling.png
-  alt: "Seedling"
-  relative: false
 ---
 
 Welcome to my dev journal!

@@ -4,10 +4,6 @@ date: 2025-08-09
 tags: [SPH]
 math: true
 summary: "The core idea of SPH is to use values stored at discrete particles to model the differentiable functions used in partial differential equations (PDEs). We do this by interpolating between our stored values using a convolutional kernel, so that our differentiable function looks something like a weighted average of all nearby particles."
-cover:
-  image: /images/kernel.png
-  alt: "Kernel visualization"
-  relative: false
 ---
 
 The core idea of SPH is to use values stored at discrete particles to model the differentiable functions used in partial differential equations (PDEs). We do this by interpolating between our stored values using a convolutional kernel, so that our differentiable function looks something like a weighted average of all nearby particles.

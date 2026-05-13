@@ -3,10 +3,6 @@ title: "Browser Dynamics"
 date: 2025-07-29
 tags: [SPH]
 summary: "This is my first post on implementing fluid dynamics in the browser. The goal is to implement a real-time fluid solver in my browser. Previously, I'd implemented an online ODE integrator for comparing explicit Euler, implicit Euler, and RK4 integration methods for a particle in a gravity field."
-cover:
-  image: /images/particles.png
-  alt: "Particles in a box"
-  relative: false
 ---
 
 This is my first post on implementing fluid dynamics in the browser. The goal is to implement a real-time fluid solver in my browser. Previously, I'd implemented an [online ODE integrator](https://ode.tarinyoom.io/) for comparing explicit Euler, implicit Euler, and RK4 integration methods for a particle in a gravity field. I don't plan on working on that project further, but it did provide me with some context for what I like and what I don't like.

@@ -1,0 +1,23 @@
+{{ define "main" }}
+<section class="intro">
+  <h1>Welcome!</h1>
+  <p>A personal blog for some personal projects. I'm interested in physical simulation, and am working on a Wasm-based fluid solver at <a href="https://sph.tarinyoom.io">sph.tarinyoom.io</a>.</p>
+</section>
+
+<div class="post-stream">
+  {{ range (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+  <article class="post" id="{{ .File.BaseFileName }}">
+    <header class="post-header">
+      <h2 class="post-title">{{ .Title }}</h2>
+      <p class="post-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+        {{ with .Params.tags }} · {{ delimit . ", " }}{{ end }}
+      </p>
+    </header>
+    <div class="post-content">
+      {{ .Content }}
+    </div>
+  </article>
+  {{ end }}
+</div>
+{{ end }}

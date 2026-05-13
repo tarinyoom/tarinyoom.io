@@ -4,10 +4,6 @@ date: 2025-08-23
 tags: [SPH]
 math: true
 summary: "This is a continuation of my N-part series on getting this SPH renderer working. My goal here is to model some kind of liquid. SPH is a technique that supposedly models water flow pretty well. So we'll see how well this works in the browser at interactive rates."
-cover:
-  image: /images/ns_equations.png
-  alt: "Navier-Stokes equations"
-  relative: false
 ---
 
 This is a continuation of my $N$-part series on getting this SPH renderer working. My goal here is to model some kind of liquid. SPH is a technique that supposedly models water flow pretty well. So we'll see how well this works in the browser at interactive rates.
