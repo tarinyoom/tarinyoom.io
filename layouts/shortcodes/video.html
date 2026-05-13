@@ -1,0 +1,4 @@
+<figure class="post-video">
+  <video src="{{ .Get "src" }}" autoplay loop muted playsinline controls preload="metadata"></video>
+  {{ with .Get "caption" }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>

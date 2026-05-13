@@ -2,6 +2,8 @@
 title: "Under Pressure"
 date: 2025-08-23
 tags: [SPH]
+math: true
+summary: "This is a continuation of my N-part series on getting this SPH renderer working. My goal here is to model some kind of liquid. SPH is a technique that supposedly models water flow pretty well. So we'll see how well this works in the browser at interactive rates."
 ---
 
 This is a continuation of my $N$-part series on getting this SPH renderer working. My goal here is to model some kind of liquid. SPH is a technique that supposedly models water flow pretty well. So we'll see how well this works in the browser at interactive rates.
@@ -41,15 +43,20 @@ So our algorithm is:
 So even though density, pressure, and acceleration are continuous functions over our spatial domain, we now have an algorithm that can approximately solve the Navier-Stokes equation by only computing values at discrete points.
 
 Here are some visualizations. First, densities:
-![Density visualization](videos/somewhere_over_the_rainbow.webm)
+
+{{< video src="/videos/somewhere_over_the_rainbow.webm" caption="Density visualization" >}}
+
 Higher density regions are red, while lower density regions are blue.
 
 Here are pressures, computed using the EoS:
-![Pressure visualization](videos/just_tait.webm)
+
+{{< video src="/videos/just_tait.webm" caption="Pressure visualization" >}}
+
 It looks kind of similar to density but changes more sharply from low to high. So this is to say that our pressure force will be harsher than just "linear in our change in density", which will help us better enforce our zero-divergence condition.
 
 Finally, here is most of the algorithm implemented. I've skipped viscosity for now.
-![Fluid visualization](videos/its_alive.webm)
+
+{{< video src="/videos/its_alive.webm" caption="Fluid visualization" >}}
 
 So we already get some fluid-like effects. We see our fluid flowing from the denser region in the lower left to the sparser region in the lower right. We also see some splashing, which is good.
 

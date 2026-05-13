@@ -2,6 +2,7 @@
 title: "Browser Dynamics"
 date: 2025-07-29
 tags: [SPH]
+summary: "This is my first post on implementing fluid dynamics in the browser. The goal is to implement a real-time fluid solver in my browser. Previously, I'd implemented an online ODE integrator for comparing explicit Euler, implicit Euler, and RK4 integration methods for a particle in a gravity field."
 ---
 
 This is my first post on implementing fluid dynamics in the browser. The goal is to implement a real-time fluid solver in my browser. Previously, I'd implemented an [online ODE integrator](https://ode.tarinyoom.io/) for comparing explicit Euler, implicit Euler, and RK4 integration methods for a particle in a gravity field. I don't plan on working on that project further, but it did provide me with some context for what I like and what I don't like.
@@ -19,6 +20,6 @@ So far, I've implemented a simple particles-in-a-box example, using a library ca
 
 I've added gravity and some simple elastic collisions against invisible walls:
 
-![Particles in a box](videos/particles_in_a_box.webm)
+{{< video src="/videos/particles_in_a_box.webm" caption="Particles in a box" >}}
 
 At this point it doesn't really look like a fluid, as much as a lot of tiny bouncing balls. The goal will be to implement [smoothed-particle hydrodynamics](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) (SPH), a technique for approximating the continuous properties of a fluid with discrete particles by interpolating between them via smooth kernel functions. Or so the lore goes.

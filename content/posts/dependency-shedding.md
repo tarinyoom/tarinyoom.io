@@ -2,12 +2,13 @@
 title: "Dependency Shedding"
 date: 2025-07-22
 tags: [thoughts]
+summary: "This is the second time I've set up a personal site. Previously, I had a simple website I'd made with a tool called create-react-app, with components from MaterialUI. It had a few cards pointing to personal projects I've worked on in the past."
 ---
 
 This is the second time I've set up a personal site. Previously, I had a simple website I'd made with a tool called [*create-react-app*](https://create-react-app.dev/docs/getting-started/), with components from [MaterialUI](https://mui.com/material-ui/).
 It had a few cards pointing to personal projects I've worked on in the past, like so:
 
-![Old Personal Website](images/old_site.png)
+![Old Personal Website](/images/old_site.png)
 
 This worked well, until the years passed and my dependabot began harassing me with streams of urgent security vulnerabilities that needed my attention.
 Of course, I could `npm audit fix` to upgrade to newer patched versions of my dependencies.
