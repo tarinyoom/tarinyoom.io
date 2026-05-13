@@ -3,3 +3,5 @@ dist
 public/*.html
 public/images
 public/videos
+.gitignore
+.claude
