@@ -32,7 +32,7 @@ jobs:
         run: hugo --minify --gc
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: site-public
           path: public/
